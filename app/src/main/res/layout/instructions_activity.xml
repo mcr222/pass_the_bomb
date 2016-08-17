@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/instructions"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#70000000"
+
+    tools:context="com.example.mcr222.pass_bomb.MainActivity">
+
+    <!-- Page 1 -->
+
+    <View android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/circle"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/newGameInstructionCircle"
+        android:visibility="invisible"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="With this button you can start a game!"
+        android:id="@+id/newGameInstructionText1"
+        android:textSize="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/newGameInstructionCircle"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Important: all players must be in the New Game screen to start a game"
+        android:textSize="30dp"
+        android:id="@+id/newGameInstructionText2"
+        android:layout_below="@+id/newGameInstructionText1"
+        android:visibility="invisible"
+        android:layout_marginTop="61dp" />
+
+    <!-- Page 2 -->
+
+    <View android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/square"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp"
+        android:id="@+id/stopGameInstructionImage"
+        android:visibility="invisible"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Once a game is started, stop it with this button!"
+        android:id="@+id/stopGameInstructionText"
+        android:textSize="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/newGameInstructionCircle"
+        android:visibility="invisible" />
+
+    <!-- Page 3 -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="When a new game is started bombs are randomly distributed"
+        android:id="@+id/bombInstructionText"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/bombInstructionImage" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bombInstructionImage"
+        android:src="@drawable/bomb"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:layout_marginTop="123dp" />
+
+
+    <!-- Page 4 -->
+
+    <View android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:background="@drawable/circle"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentLeft="true"
+        android:visibility="invisible"
+        android:id="@+id/gameUniqueIDInstructionCircle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Every game will have a unique ID to avoid cheating!"
+        android:id="@+id/gameUniqueIDInstructionText"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/counterInstructionCircle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gameUniqueIDInstructionImage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:textSize="15dp"
+        android:text="a9q4qer"
+        android:visibility="invisible"
+        android:layout_alignTop="@+id/pointsLeft"/>
+
+    <!-- Page 5 -->
+
+    <View android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:background="@drawable/circle"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:id="@+id/counterInstructionCircle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Once you unlock your phone, bomb will be activated and you'll start loosing points!"
+        android:id="@+id/counterInstructionText1"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/counterInstructionCircle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="The countdown will stop if you leave your phone locked for the time it takes to loose one fifth of the initial points!"
+        android:id="@+id/counterInstructionText2"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/counterInstructionText1" />
+
+    <!-- Page 6 -->
+
+
+    <View android:background="@drawable/circle"
+        android:layout_width="500dp"
+        android:layout_height="120dp"
+
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:id="@+id/unloadBombCircle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=" With this button you can pass the bomb to a Bluetooth-distance player who is using her/his phone (unlocked) "
+        android:id="@+id/unloadBombText"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/counterInstructionCircle" />
+
+    <!-- Page 7 -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="To start a game, all players should be in this screen. But only one player has to do the rest of the setup!"
+        android:id="@+id/initInstructionText"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/configurePointsInstructionCircle" />
+
+    <!-- Page 7b -->
+
+    <View android:background="@drawable/circle"
+        android:layout_width="500dp"
+        android:layout_height="120dp"
+
+        android:visibility="invisible"
+        android:id="@+id/configurePointsInstructionCircle"
+        android:layout_below="@+id/stopGameInstructionImage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Configure how many points the game will last (beware: 1 points is lost every minute"
+        android:id="@+id/configurePointsInstructionText"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/configurePointsInstructionCircle" />
+
+    <!-- Page 8b -->
+
+    <View android:background="@drawable/circle"
+        android:layout_width="500dp"
+        android:layout_height="120dp"
+
+        android:visibility="invisible"
+        android:id="@+id/configureBombsInstructionCircle"
+        android:layout_below="@+id/configurePointsInstructionCircle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Configure how many bombs will be on game"
+        android:id="@+id/configureBombsInstructionText"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/configureBombsInstructionCircle" />
+
+    <!-- Page 9 -->
+
+    <View android:background="@drawable/circle"
+        android:layout_width="500dp"
+        android:layout_height="120dp"
+
+        android:visibility="invisible"
+        android:id="@+id/searchPlayersInstructionCircle"
+        android:layout_below="@+id/configurePointsInstructionCircle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Click here to search players through Bluetooth (wait 20 sec)"
+        android:id="@+id/searchPlayersInstructionText"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/configureBombsInstructionCircle" />
+
+    <!-- Page 10 -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Select all players that want to play!"
+        android:id="@+id/selectPlayersInstructionText"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/configureBombsInstructionCircle" />
+
+    <!-- Page 11 -->
+    <View android:background="@drawable/circle"
+        android:layout_width="500dp"
+        android:layout_height="120dp"
+
+        android:visibility="invisible"
+        android:id="@+id/startGameInstructionCircle"
+        android:layout_below="@+id/newGameInstructionText2"
+        android:layout_alignLeft="@+id/counterInstructionCircle"
+        android:layout_alignStart="@+id/counterInstructionCircle" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Now you can start the game and enjoy!!"
+        android:id="@+id/startGameInstructionText1"
+        android:textSize="30dp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Important! The game will allow you to unload the bomb after 1 minute."
+        android:id="@+id/startGameInstructionText2"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_above="@+id/newGameInstructionText2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Important! Accept all the bluetooth pairing requests!"
+        android:id="@+id/startGameInstructionText3"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/newGameInstructionText2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+
+</RelativeLayout>
