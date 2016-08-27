@@ -21,6 +21,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ *
+ * This class includes all the functionalities related with bluetooth connection and message
+ * sending through bluetooth.
+ *
  * Created by mcr222 on 27/06/16.
  */
 public class BluetoothServices {
@@ -159,7 +163,7 @@ public class BluetoothServices {
                 }
             }
         }
-    };
+    }
 
     public static void detectNearbyDevices(Callback bluetoothCallback) {
 
