@@ -1,7 +1,7 @@
 # Introduction
 This code is the prototipe/base for a new android app game. The **Bomb game**.
 
-#Main idea
+# Main idea
 The **Bomb game** is a game app that intends to avoid the over use of the phone 
 when in social reunions: meeting friends or family, at a restaurant, bar or party.
 
