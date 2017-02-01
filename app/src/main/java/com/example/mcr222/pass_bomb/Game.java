@@ -1,3 +1,8 @@
+/*
+ * ©Copyright, 2016 Marc Cayuela Rafols
+ * All Rights Reserved.
+ */
+
 package com.example.mcr222.pass_bomb;
 
 import android.widget.ImageView;
@@ -13,13 +18,19 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Created by mcr222 on 27/06/16.
+ * Game contains all data related to a game.
+ * It is serializable because it is sent between players though bluetooth, so it needs to be
+ * serialized.
+ * Created by Marc Cayuela Rafols on 27/06/16.
  */
 public class Game implements Serializable {
-    //Includes mePlayer
+    //List of all players in the game, including this player itself
     private ArrayList<Player> players;
+    //how many points does the game start with
     private Integer startPoints;
+    //whether this player starts with the bomb
     private Boolean startsWithBomb;
+    //the game unique identifier string (random string shared between all players)
     private String uniqueString;
 
     public Game(Integer startPoints, ArrayList<Player> players, String uniqueString){
@@ -31,6 +42,10 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Creates a copy of this game
+     * @return copy of this game
+     */
     public Game getCopy() {
         ArrayList<Player> copyPlayers = new ArrayList<Player>();
         for(int i =0;i<players.size();++i) {

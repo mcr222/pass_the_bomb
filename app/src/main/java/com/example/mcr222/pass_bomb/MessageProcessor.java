@@ -1,3 +1,8 @@
+/*
+ * ©Copyright, 2016 Marc Cayuela Rafols
+ * All Rights Reserved.
+ */
+
 package com.example.mcr222.pass_bomb;
 
 import android.app.Activity;
@@ -9,15 +14,23 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by mcr222 on 27/06/16.
+ * Logic that creates and sends messages (Message.java). This basically creates the logic that interprets
+ * each kind of message.
+ *
+ * Very tightly related to the BluetoothServices.java class.
+ *
+ * Created by Marc Cayuela Rafols on 27/06/16.
  */
 public class MessageProcessor {
+    //object that represents the bomb of this game (it is in this class because it is where it is
+    // most used
     private static Bomb bomb;
     private static NewGameActivity newGameActivity;
 
-    private static Timer timerBlockBomb = new Timer();;
-    private static long timerBlockInterval = 10000;
+    /*private static Timer timerBlockBomb = new Timer();;
+    private static long timerBlockInterval = 10000;*/
 
+    //whether the bomb was unloaded or not
     private static boolean bombUnloaded = false;
 
     public static void setNewGameActivity(NewGameActivity newGameActivity){
@@ -32,14 +45,21 @@ public class MessageProcessor {
         return bomb;
     }
 
+    /**
+     * Tries to send to all players the bomb to unload it to any player. BluetoothServices makes sure
+     * that the unloadBomb is sent only to one user at a time (but that all are tried).
+     */
     public static void sendUnloadBomb(){
         if(bomb.hasBomb()) {
+            //gets a randomized list of players to send randomly
             ArrayList<Player> allPlayers = BluetoothServices.getRandomPlayersList();
             System.out.println("All players:");
             System.out.println(allPlayers);
             Iterator<Player> it = allPlayers.iterator();
             while(it.hasNext()) {
                 bombUnloaded = false;
+                //creates messages of type unloadBomb to be sent to all players (BluetoothServices
+                //will take into account not resending bomb multiple times)
                 BluetoothServices.sendMessage(it.next(), new Message(Message.MessageType.unloadBomb, ""));
             }
         }

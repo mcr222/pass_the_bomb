@@ -1,3 +1,8 @@
+/*
+ * ©Copyright, 2016 Marc Cayuela Rafols
+ * All Rights Reserved.
+ */
+
 package com.example.mcr222.pass_bomb;
 
 import android.view.View;
@@ -17,8 +22,6 @@ public class UnloadBombButton {
 
     private void onClickAction(){
         if(MainActivity.isGameOn()) {
-            //TODO:when player has 0 points do not allow bomb passing
-            //TODO: put timer before this button becomes available at the start of the game
             if (!BluetoothServices.hasPendingUnloadBomb()) {
                 MessageProcessor.sendUnloadBomb();
             } else {
