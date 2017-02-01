@@ -1,3 +1,8 @@
+/*
+ * ©Copyright, 2016 Marc Cayuela Rafols
+ * All Rights Reserved.
+ */
+
 package com.example.mcr222.pass_bomb;
 
 import android.bluetooth.BluetoothDevice;

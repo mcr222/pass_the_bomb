@@ -1,3 +1,8 @@
+/*
+ * ©Copyright, 2016 Marc Cayuela Rafols
+ * All Rights Reserved.
+ */
+
 package com.example.mcr222.pass_bomb;
 
 import android.app.Activity;
@@ -23,9 +28,9 @@ import java.util.TimerTask;
 /**
  *
  * This class includes all the functionalities related with bluetooth connection and message
- * sending through bluetooth.
+ * sending through bluetooth. THIS IS A CRITICAL CLASS.
  *
- * Created by mcr222 on 27/06/16.
+ * Created by Marc Cayuela Rafols on 27/06/16.
  */
 public class BluetoothServices {
 
@@ -192,12 +197,12 @@ public class BluetoothServices {
         initialConnectionThread.start();
         //this insists until all initial messages have been sent
         initialTimer = new Timer();
-        initialTimer.schedule(new TimerTask() {
+        /*initialTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 BluetoothServices.sendPendingMessages();
             }
-        },10000,10000);
+        },10000,10000);*/
     }
 
     private static void waitForConnections() {
@@ -239,6 +244,7 @@ public class BluetoothServices {
         return arrayKeys;
     }
 
+    //TODO: BluetoothServices must make sure that the unloadBomb is sent only to one user at a time.
     public synchronized static void sendMessage(Player receiver, Message message){
         System.out.println("Sending message");
         System.out.println(message);
@@ -285,6 +291,9 @@ public class BluetoothServices {
         System.out.println(sendingQueue.size());
         PendingMessage pendingMessage;
         LinkedList<PendingMessage> pendingMessages = new LinkedList<>(sendingQueue);
+        //TODO: important, no resending messages of unload bomb when phone is locked, since then it bomb could be
+        //TODO: send by the phone when resending messages (this case is protected by the fact that messages are only
+        //TODO: resend when user presses send button
         while(!pendingMessages.isEmpty()) {
             sendingQueue.poll();
             pendingMessage = pendingMessages.poll();
@@ -303,20 +312,21 @@ public class BluetoothServices {
         System.out.println("Received new message");
         System.out.println(sender);
         System.out.println(message);
+        if(message==null) {
+            System.out.println("Received NULL message!");
+            return;
+        }
         System.out.println(message.getType());
         Message.MessageType messageType = message.getType();
         if(messageType.equals(Message.MessageType.unloadBomb)) {
-            System.out.println("Switch tooooo");
             System.out.println("unloadBomb");
             MessageProcessor.receiveUnloadBomb(sender);
         }
         else if(messageType.equals(Message.MessageType.ifBombUnloaded)) {
-            System.out.println("Switch tooooo");
             System.out.println("ifBombUnloaded");
             MessageProcessor.receiveIfBombUnloaded(message);
         }
         else if(messageType.equals(Message.MessageType.newGame)) {
-            System.out.println("Switch tooooo");
             System.out.println("newGame");
             MessageProcessor.receiveNewGame(message);
         } else if (messageType.equals(Message.MessageType.receivedNewGame)) {
