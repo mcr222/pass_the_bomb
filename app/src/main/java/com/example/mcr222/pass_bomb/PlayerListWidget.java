@@ -23,16 +23,29 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by mcr222 on 1/07/16.
+ * This is the widget that shows the list of possible players when creating a new game (it contains
+ * the potential players and displays them in the phone new game screen).
+ *
+ * Created by Marc Cayuela Rafols on 1/07/16.
  */
 public class PlayerListWidget {
+    //android object that supports the view of the list
     private ListView playerListWidget;
+    //adapter that connects the list of objects to visualize with the visualization itself. In other
+    //words, it takes the objects to be displayed and transforms them in a displayable View item that
+    //will go inside the ListView.
     private NewGameActivity.PlayersAdapter listAdapter;
+    //list of objects to display
     private ArrayList<Player> selectedPlayers;
     private final NewGameActivity activity;
 
 
-
+    /**
+     *
+     * @param playerListWidget
+     * @param listAdapter
+     * @param activity
+     */
     public PlayerListWidget(ListView playerListWidget, NewGameActivity.PlayersAdapter listAdapter, final NewGameActivity activity) {
         this.activity = activity;
         this.listAdapter = listAdapter;
@@ -60,6 +73,11 @@ public class PlayerListWidget {
         });
     }
 
+    /**
+     * Get the list of currently selected players from the list
+     *
+     * @return
+     */
     public ArrayList<Player> getSelectedPlayers() {
         return selectedPlayers;
     }

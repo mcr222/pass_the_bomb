@@ -25,25 +25,47 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
-
+/**
+ * New game activity
+ * Defines the page where a new game is created
+ *
+ * Created by Marc Cayuela Rafols on 27/06/16.
+ */
 public class NewGameActivity extends AppCompatActivity {
+    //button to start a new game
     private Button startGameButton;
+    //text boxes to input game variables
     private EditText numberPoints;
     private EditText numberBombs;
+
+    //widget that contains all potential players
     private PlayerListWidget playerListWidget;
+    //button to search players via bluetooth
     private Button searchPlayers;
 
+    //this adapter converts a list of objects into a list of elements to be viewed in the phone screen
+    //(see PlayerListWidget.java)
     public class PlayersAdapter extends ArrayAdapter<Player> {
 
         public PlayersAdapter(Context context) {
             super(context, 0, new ArrayList<Player>());
         }
 
+        /**
+         * This function is called by the list view for every object in the list of objects that want
+         * to be showed. For each of this items the function returns a View item that the list can
+         * render inside itself.
+         *
+         * @param position position in the list of objects to display
+         * @param convertView list view that contains items to be viewed
+         * @param parent view that contains the list view
+         * @return
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            // Get the data item for this position
+            // Get the object for this position to be displayed
             Player player = getItem(position);
-            // Check if an existing view is being reused, otherwise inflate the view
+            // Check if an existing view (for the list) is being reused, otherwise inflate the view
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.listitem, parent, false);
             }
@@ -51,7 +73,7 @@ public class NewGameActivity extends AppCompatActivity {
             TextView playerName = (TextView) convertView.findViewById(R.id.playerName);
             // Populate the data into the template view using the data object
             playerName.setText(player.getId());
-            // Return the completed view to render on screen
+            // Return the completed view for the object that wants to be rendered
             return convertView;
         }
     }
@@ -105,7 +127,7 @@ public class NewGameActivity extends AppCompatActivity {
 
         MessageProcessor.setNewGameActivity(this);
 
-        //TODO: in this all should be waiting for incoming bluetooth conenctions to receive the game
+        //TODO: in this point all should be waiting for incoming bluetooth conenctions to receive the game
 
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +157,7 @@ public class NewGameActivity extends AppCompatActivity {
 
                     Game game = new Game(points, selectedPlayers, null);
 
-                    //TODO: check if this returns before a connection is stablished between players (if it does must use callback to continue)
+                    //TODO: check if this returns before a connection is established between players (if it does must use callback to continue)
                     BluetoothServices.setAllPlayers(game.getPlayers());
 
                     HashSet<Integer> playersWithStartingBomb
@@ -202,6 +224,9 @@ public class NewGameActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Hides the phone's keyboard
+     */
     public void hideKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);

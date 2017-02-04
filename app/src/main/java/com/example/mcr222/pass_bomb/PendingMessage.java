@@ -6,7 +6,10 @@
 package com.example.mcr222.pass_bomb;
 
 /**
- * Created by mcr222 on 19/07/16.
+ * Pending message to be send. It is a message that failed to be sent. It contains the message that
+ * had to be sent and the player to whom it must be sent.
+ *
+ * Created by Marc Cayuela Rafols on 19/07/16.
  */
 public class PendingMessage {
         private Player playerToSend;

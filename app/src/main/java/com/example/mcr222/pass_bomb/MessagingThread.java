@@ -15,7 +15,9 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 /**
- * Created by mcr222 on 8/07/16.
+ *
+ *
+ * Created by Marc Cayuela Rafols on 8/07/16.
  */
 public class MessagingThread extends Thread{
 
