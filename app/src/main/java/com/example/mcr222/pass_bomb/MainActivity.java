@@ -21,10 +21,6 @@ import android.content.Intent;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
@@ -34,7 +30,7 @@ import java.util.UUID;
 /**
  * Main activity
  * Defines the main page of the app, where the game develops
- * <p>
+ *
  * Created by Marc Cayuela Rafols on 27/06/16.
  */
 public class MainActivity extends AppCompatActivity {
@@ -58,11 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String SERVICE_NAME = "le8tY9a1sc3TTq21Wbg";
     public static final UUID uuid = new UUID(5566644, 3322555);
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
         setGame((Game) getIntent().getSerializableExtra("Game"));
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -225,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Toasts are the messages to show on the phone when screen is locked.
+     * Toast are small messages that appear over the app screen
      *
      * @param text message to show
      */
@@ -261,43 +249,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.mcr222.pass_bomb/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.mcr222.pass_bomb/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
 }

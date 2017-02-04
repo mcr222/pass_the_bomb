@@ -14,16 +14,23 @@ import android.content.IntentFilter;
 import android.support.v4.app.NotificationCompat;
 
 /**
- * Created by mcr222 on 27/06/16.
+ * This class manages all the communication between the phone's actions (locking, notifications...)
+ * and the app.
+ *
+ * Created by Marc Cayuela Rafols on 27/06/16.
  */
 public class PhoneService {
 
+    //whether phone is locked
     private static boolean isLocked;
     private static MainActivity mainActivity;
     private static final int NOTIFICATION_ID = 222;
 
+    //
     private static NotificationManager mNotificationManager;
     // Create a BroadcastReceiver for ACTION_FOUND
+    // We can register actions to the phone and when the action happens the phone will
+    // call the broadcast receiver registered
     public static class UnlockReceiver extends BroadcastReceiver {
 
         public void onReceive(Context context, Intent intent) {
@@ -33,6 +40,7 @@ public class PhoneService {
                 isLocked = false;
                 phoneUnlocksEvent();
             }
+            //when phone is locked
             else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
                 isLocked = true;
             }
@@ -40,10 +48,16 @@ public class PhoneService {
         }
     };
 
+    /**
+     * Starts the service that controls the user actions performed on the phone
+     * @param activity main game activity
+     */
     public static void startPhoneService(MainActivity activity) {
         isLocked = false;
+        //the filters are the actions from the phone that we want to keep informed of
         IntentFilter filter = new IntentFilter(Intent.ACTION_USER_PRESENT);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
+        //must register a receiver in order to do things when filter actions are registered
         activity.mainRegisterReceiver(new UnlockReceiver(), filter); // TODO: Don't forget to unregister during onDestroy
         PhoneService.mainActivity = activity;
 
@@ -51,18 +65,33 @@ public class PhoneService {
                 (NotificationManager) mainActivity.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
+    /**
+     * Wheter phone is currently locked
+     * @return
+     */
     public static boolean isPhoneLocked() {
         return isLocked;
     }
 
+    /**
+     * This processes the unlock event.
+     */
     public static void phoneUnlocksEvent() {
         MessageProcessor.handleUnlockEvent();
     }
 
+    /**
+     * Removes the current notification.
+     */
     public static void removeNotification() {
         mNotificationManager.cancel(PhoneService.NOTIFICATION_ID);
     }
 
+    /**
+     * Sends a notification to the user. Notifications are the messages to show on the phone (they
+     * appear in the notification center when phone is locked).
+     * @param text text of the notification. If null "You have received a bomb!" is the default text.
+     */
     public static void sendNotification(String text){
         if(text==null) {
             text = "You have received a bomb!";
@@ -76,7 +105,6 @@ public class PhoneService {
                         .setContentTitle("Pass the bomb")
                         .setContentText(text)
                         .setPriority(Notification.PRIORITY_MAX);
-        //TODO: consider a head up notification (just add vibrate to make it head's up notification)
 
         // mId allows you to update the notification later on.
         mNotificationManager.notify(PhoneService.NOTIFICATION_ID, mBuilder.build());
