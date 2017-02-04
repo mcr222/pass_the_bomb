@@ -60,3 +60,34 @@ the ID will disapear, and starting a new game won't produce the same ID.
 4. Branch the code and do merge request.
 5. Test the code that you implement (in a real phone if possible)
 6. **Comment** all the code that you develop
+
+# Competition analysis
+This are some apps that revolve around the same idea of not looking at your phone.
+There are a lot of them, but all of them focus on oneself.
+
+http://www.inc.com/jeremy-goldman/6-apps-to-stop-your-smartphone-addiction.html
+
+The most similar to our approach is *Flipd* one: http://flipdapp.co/
+It is similar because it is thought for use in a classroom, but it take a harsher
+approach of blocking the phone. Good thing is it has around:  10,000 - 50,000 installs,
+which means that our market is considerable.
+
+There is actually another similar one, and that is *bSociable* (https://www.anti-apps.com/). 
+It allows to get points for not using the phone, but it doesn't allow you to look at 
+your phone at all (not even lock it as it must run in foreground). And it does
+not have the sociable interaction of passing the bomb. Additionally it is only for
+iPhone (https://itunes.apple.com/au/app/bsociable/id1002964913?mt=8).
+
+**Thus, we haven't found anything close to similar to our approach, so there is** 
+**market and we are creating something innovative.**
+
+# Making money
+First of all all people involved in the project might be aware that we could potentially
+not win anything, or just very little. So everyone must be aware of the time he/she is
+willing to invest and their limits.
+
+Secondly, approaches to monetize the app:
+1. Add advertisements
+2. Add additional bombs with different behaviors that can spice up the game. 
+As the bomb is shared among users, the price can be split up between players 
+(which makes it insignificant for players, but allows us to make some profit)
