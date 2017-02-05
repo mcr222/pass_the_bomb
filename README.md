@@ -87,9 +87,10 @@ not win anything, or just very little. So everyone must be aware of the time he/
 willing to invest and their limits.
 
 Secondly, approaches to monetize the app:
-1. Add advertisements
-    Ferran: Ads degrade user experience, so lets try to avoid them. Also, I don't know if they make much sense providing that the goal of the app is to not look at your phone :)
+1. Add advertisements.
+    *Ferran*: Ads degrade user experience, so lets try to avoid them. Also, I don't know if they make much sense providing that the goal of the app is to not look at your phone :)
 2. Add additional bombs with different behaviors that can spice up the game. 
 As the bomb is shared among users, the price can be split up between players 
-(which makes it insignificant for players, but allows us to make some profit)
-    Ferran: we can even sell different mini games. E.g. something like a race: you sum meters whenever you don't look at the phone.
+(which makes it insignificant for players, but allows us to make some profit).
+    *Ferran*: we can even sell different mini games. E.g. something like a race: you sum meters whenever you don't look at the phone.
+3. We could let users choose among different icons. We can even include other things so we provide an alternative for people worried about violent: what bout a flower?
