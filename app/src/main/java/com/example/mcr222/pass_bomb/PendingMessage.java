@@ -12,7 +12,9 @@ package com.example.mcr222.pass_bomb;
  * Created by Marc Cayuela Rafols on 19/07/16.
  */
 public class PendingMessage {
+        //player to whom the message must be sent
         private Player playerToSend;
+        //message to be sent
         private Message messageToSend;
 
         public PendingMessage(Player playerToSend, Message messageToSend) {

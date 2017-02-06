@@ -10,10 +10,14 @@ import android.bluetooth.BluetoothDevice;
 import java.io.Serializable;
 
 /**
- * Created by mcr222 on 29/06/16.
+ * Represents a player in the game
+ *
+ * Created by Marc Cayuela Rafols on 29/06/16.
  */
 public class Player implements Serializable{
+    //id is the name of the player
     private String id;
+    //MAC is the physical address of the players' phone device
     private String MAC;
 
     public Player(String id, String MAC) {
@@ -34,6 +38,9 @@ public class Player implements Serializable{
     }
 
     @Override
+    /**
+     * Compares to players to check if they are equal
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

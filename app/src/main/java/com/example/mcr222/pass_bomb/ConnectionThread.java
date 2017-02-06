@@ -11,12 +11,21 @@ import android.bluetooth.BluetoothSocket;
 import java.io.IOException;
 
 /**
- * Created by mcr222 on 8/07/16.
+ * This thread is responsible for creating connections via bluetooth. It basically connects with a
+ * player. In order to establish the connections, the other player must have a listening thread that
+ * will accept the connections (this is done with the ReceptionConnectionsThread.java).
+ *
+ * Created by Marc Cayuela Rafols on 8/07/16.
  */
 public class ConnectionThread extends Thread {
     private final BluetoothSocket mmSocket;
 
+    /**
+     * Creates the thread
+     * @param playerToConnect player to connect to
+     */
     public ConnectionThread(Player playerToConnect) {
+        //gets the device to connect to (the player's device)
         BluetoothDevice deviceToConnect = BluetoothServices.getmBluetoothAdapter().getRemoteDevice(playerToConnect.getMAC());
         System.out.println("device to connect to");
         System.out.println(deviceToConnect.getAddress());
@@ -27,9 +36,10 @@ public class ConnectionThread extends Thread {
         // because mmSocket is final
         BluetoothSocket tmp = null;
 
-        // Get a BluetoothSocket to connect with the given BluetoothDevice
+        // Get a BluetoothSocket to connect with the given BluetoothDevice (that is a player)
         try {
-            // MY_UUID is the app's UUID string, also used by the server code
+            // MY_UUID is the app's UUID string, also used by the reception part of the code
+            // creates and insecure RF socket
             tmp = deviceToConnect.createInsecureRfcommSocketToServiceRecord(MainActivity.uuid);
             System.out.println("Socket found!");
 
@@ -37,6 +47,9 @@ public class ConnectionThread extends Thread {
         mmSocket = tmp;
     }
 
+    /**
+     * Run the thread to try to connect to the player
+     */
     public void run() {
         // Cancel discovery because it will slow down the connection
         BluetoothServices.getmBluetoothAdapter().cancelDiscovery();
@@ -54,7 +67,8 @@ public class ConnectionThread extends Thread {
             return;
         }
 
-        // Do work to manage the connection (in a separate thread)
+        //if connection was successful then create a thread that will manage the messaging in the
+        // already open connection
         new MessagingThread(mmSocket).start();
     }
 

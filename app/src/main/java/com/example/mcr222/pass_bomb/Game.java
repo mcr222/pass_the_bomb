@@ -33,6 +33,12 @@ public class Game implements Serializable {
     //the game unique identifier string (random string shared between all players)
     private String uniqueString;
 
+    /**
+     * Creates a new game
+     * @param startPoints
+     * @param players
+     * @param uniqueString if null then a random UID is generated
+     */
     public Game(Integer startPoints, ArrayList<Player> players, String uniqueString){
         this.startPoints = startPoints;
         this.players = players;

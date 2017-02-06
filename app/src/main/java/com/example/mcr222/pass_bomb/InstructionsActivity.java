@@ -15,7 +15,9 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 
 /**
- * Created by mcr222 on 1/08/16.
+ * Screen that overlays over the main screen and the new game screen in order to explain the game
+ *
+ * Created by Marc Cayuela Rafols on 1/08/16.
  */
 public class InstructionsActivity extends Activity {
 
@@ -23,10 +25,13 @@ public class InstructionsActivity extends Activity {
     private static final String INSTRUCTION_MAIN = "instruction_main";
     private static final String INSTRUCTION_NEW = "instruction_new";
 
-    //TODO:remove this (this is to avoid showing the instructions at the beggining every time when testing)
+    //TODO:remove this (this is to avoid showing the instructions at the beginning every time when testing)
     private static boolean mainAlready = false;
     private static boolean newAlready = false;
 
+    //This list contains all the objects to show for the instructions of the main page.
+    //Every element of the list is a list, where each list is a page of the instructions. The elements of
+    //the list are the view objects of the instructions.
     private int[][] instructionsMain = new int[][]{
             {R.id.newGameInstructionCircle, R.id.newGameInstructionText1, R.id.newGameInstructionText2},
             {R.id.stopGameInstructionImage, R.id.stopGameInstructionText},
@@ -36,6 +41,7 @@ public class InstructionsActivity extends Activity {
             {R.id.unloadBombCircle, R.id.unloadBombText}
     };
 
+    //Same as the other list of lists but this are instructions for the new game page.
     private int[][] instructionsNew = new int[][]{
             {R.id.initInstructionText},
             {R.id.configurePointsInstructionCircle, R.id.configurePointsInstructionText},
@@ -45,8 +51,10 @@ public class InstructionsActivity extends Activity {
             {R.id.startGameInstructionCircle, R.id.startGameInstructionText1, R.id.startGameInstructionText2, R.id.startGameInstructionText3}
     };
 
+    //what instructions to use depending if on main screen or new game screen
     private int[][] instructionsToUse;
 
+    //current page of the instructions shown (i.e. index of the list of lists).
     private int currentPage = 0;
 
     @Override
@@ -57,6 +65,7 @@ public class InstructionsActivity extends Activity {
 
         setContentView(R.layout.instructions_activity);
 
+        //gets which screen is being showed now in order to use the appropriate instructions
         final String mode = (String) getIntent().getSerializableExtra(INSTRUCTION);
 
         if (mode.equals(INSTRUCTION_MAIN)) {
@@ -65,10 +74,12 @@ public class InstructionsActivity extends Activity {
             instructionsToUse = instructionsNew;
         }
 
+        //sets to the initial instructions page
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.instructions);
         changePage(currentPage - 1, currentPage, mode);
         currentPage += 1;
 
+        //when the layout is clicked on, then change of page of instructions
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,14 +90,24 @@ public class InstructionsActivity extends Activity {
 
     }
 
+    /**
+     * Changes between the pages of the instructions shown
+     *
+     * @param previousPage previous page that was shown
+     * @param pageToShow page to show
+     * @param mode string specifying the screen seen (main or new game).
+     */
     private void changePage(int previousPage, int pageToShow, String mode) {
         if (previousPage > -1) {
+            //sets all elements of previous page to invisible (hides page)
             showHidePage(previousPage, View.INVISIBLE);
         }
 
         if (pageToShow < instructionsToUse.length) {
+            //shows next page if there is next page
             showHidePage(pageToShow, View.VISIBLE);
         } else {
+            //if no next page, then go to the main or new game activity (hides instructions)
             Intent intent;
             if (mode.equals(INSTRUCTION_MAIN)) {
                 intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -98,6 +119,11 @@ public class InstructionsActivity extends Activity {
         }
     }
 
+    /**
+     * Shows or hides all elements of an instruction page
+     * @param page index of the page to show/hide
+     * @param mode whether to show or hide the page
+     */
     private void showHidePage(int page, int mode) {
         int[] instr = instructionsToUse[page];
         for (int i = 0; i < instr.length; ++i) {
@@ -105,7 +131,14 @@ public class InstructionsActivity extends Activity {
         }
     }
 
+    /**
+     * Shows the instructions overlay over the activity specified if they have not been showed before
+     * @param activity activity onto which to overlay instructions
+     */
     public static void showInstructions(Activity activity) {
+        //this is a global variable that is stored with the app memory in the phone forever in order to know
+        //whether instructions have been shown before or not, as we do not want to show instructions
+        //all the time the app is started
         String preferenceKeyword = "RanBefore_" + activity.getLocalClassName();
         System.out.println(preferenceKeyword);
         SharedPreferences preferences = activity.getPreferences(MODE_PRIVATE);
@@ -120,9 +153,12 @@ public class InstructionsActivity extends Activity {
 //        }
         System.out.println(mainAlready);
         System.out.println(newAlready);
-        //TODO: change de if
+        //TODO: change de if with the commented if below when ready to deploy app
         if (!ranBefore) {
             //if((mode.equals(INSTRUCTION_MAIN) && !mainAlready) || (mode.equals(INSTRUCTION_NEW) && !newAlready) ) {
+
+            //sets the value of the long term variable to true (meaning that instructions have been
+            //shown already for the specific activity).
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean(preferenceKeyword, true);
             editor.commit();
@@ -135,6 +171,7 @@ public class InstructionsActivity extends Activity {
                 intent.putExtra(INSTRUCTION, INSTRUCTION_NEW);
                 newAlready = true;
             }
+            //start instructions activity
             activity.startActivity(intent);
 
         }

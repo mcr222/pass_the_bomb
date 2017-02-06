@@ -60,18 +60,25 @@ public class MessageProcessor {
                 bombUnloaded = false;
                 //creates messages of type unloadBomb to be sent to all players (BluetoothServices
                 //will take into account not resending bomb multiple times)
+                //TODO: check that unloadBomb messages are sent one by one!!!
                 BluetoothServices.sendMessage(it.next(), new Message(Message.MessageType.unloadBomb, ""));
             }
         }
     }
 
 
+    /**
+     * Receives whether the bomb was successfully unloaded or not
+     *
+     * @param message unloadBomb message
+     */
     public synchronized static void receiveIfBombUnloaded(Message message){
         System.out.println("Received bomb if unloaded!!");
         System.out.println(message);
         System.out.println(message.getClass());
         System.out.println(message.getPayload());
         System.out.println(message.getPayload().getClass());
+        //hide bomb if it was successfully unloaded
         bombUnloaded = (Boolean) message.getPayload();
         if (bombUnloaded) {
             bomb.hideBomb();
@@ -93,19 +100,35 @@ public class MessageProcessor {
         }
     }*/
 
+    /**
+     * Gets the bomb from a remote player. That is, some other player has unloaded the bomb to this
+     * player.
+     *
+     * @param sender who sent the bomb to this player
+     */
     private static void getBomb(Player sender) {
         try {
+            //this player now has the bomb
             bomb.showBomb();
+            //sends to the sender player that the bomb was succesfully unloaded
             sendIfBombUnloaded(sender, true);
         } catch (HasBombException exception) {
             //Should never be an exception as if it has bomb is checked
-            //previously
+            //previously (in receiveUnloadBomb function)
             sendIfBombUnloaded(sender, false);
         }
     }
 
+    /**
+     * Receives an unload bomb message. That is, another remote player is trying to unload bomb to
+     * this player.
+     *
+     * @param sender player that's trying to unload the bomb.
+     */
     public synchronized static void receiveUnloadBomb(Player sender) {
         System.out.println("Receiving bomb");
+        //only can receive the bomb if it doesn't have a bomb already and the player's phone is
+        //unlocked, otherwise the bomb is not unloaded
         if(!bomb.hasBomb()) {
             if (PhoneService.isPhoneLocked()) {
                 System.out.println("Phone locked, can't unload");
@@ -123,24 +146,50 @@ public class MessageProcessor {
         }
     }
 
+    /**
+     * Sends a message of type ifBombUnloaded, that specifies whether the bomb was unloaded to this
+     * player or not
+     *
+     * @param sender who sent the bomb
+     * @param unloaded whether the bomb was unloaded to this player (player receives the bomb)
+     */
     public static void sendIfBombUnloaded(Player sender, boolean unloaded){
         System.out.println("Sending if bomb was unloaded!!");
         BluetoothServices.sendMessage(sender,new Message(Message.MessageType.ifBombUnloaded, new Boolean(unloaded)));
     }
 
+    /**
+     * Handles the unlock event by activating the bomb
+     */
     public static void handleUnlockEvent(){
         System.out.println("unlocks!");
         bomb.activateBomb();
     }
 
+    /**
+     * Sends a message containing the new game to be started (that's when this player has done
+     * the set up of the game)
+     *
+     * @param player player to be sent the game
+     * @param game game to send to the player
+     */
     public static void sendNewGame(Player player, Game game) {
         BluetoothServices.sendMessage(player,new Message(Message.MessageType.newGame,game));
     }
 
+    /**
+     * Receives a new game message (that's when another player has done the set up of the game)
+     *
+     * @param message message containing the game
+     */
     public synchronized static void receiveNewGame(Message message) {
-        //TODO: Should set game from NewActivity (that changes to MainActivity
+        //set the new game
         Game game = (Game)message.getPayload();
         newGameActivity.setGame(game);
+
+        //sends to all players the message confirming the reception of the new game.
+        //It is sent to all players in order to create connections with all the players in the game
+        //TODO: doesn't this create duplicate connections??
         Iterator<Player> it = game.getPlayers().iterator();
         while(it.hasNext()) {
             Player player = it.next();
