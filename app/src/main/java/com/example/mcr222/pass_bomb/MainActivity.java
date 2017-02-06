@@ -90,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
+    /**
+     * this is necessary to avoid problems when phone is rotated
+     */
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         //Do nothing
@@ -116,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Registers a broadcast receiver to listen to different phone actions done outside the app (like
+     * locking the phone or shutting down bluetooth).
+     *
      * @param broadcastReceiver
      * @param filter
      */
@@ -124,6 +130,10 @@ public class MainActivity extends AppCompatActivity {
         receivers.add(broadcastReceiver);
     }
 
+    //TODO: this should be used to kill the receivers when game is closed
+    /**
+     * Unregisters all the broadcast receivers registered to the phone by the app
+     */
     private void unregisterReceivers() {
         Iterator<BroadcastReceiver> it = receivers.iterator();
         while (it.hasNext()) {
@@ -132,6 +142,9 @@ public class MainActivity extends AppCompatActivity {
         receivers.clear();
     }
 
+    /**
+     * Sets the button that goes to the new game creation screen
+     */
     private void setNewGameButton() {
         newGameButton.setText("+");
         newGameButton.setBackgroundColor(Color.GRAY);
@@ -145,6 +158,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Changes the new game button by a stop button in order to stop the game
+     */
     private void setNewGameButtonAsStop() {
         newGameButton.setText(" ");
         newGameButton.setBackgroundColor(Color.RED);
@@ -166,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
             Bomb bomb = MessageProcessor.getBomb();
             bomb.initializeCounter(game.getStartPoints(), pointsLeftView);
             BluetoothServices.setAllPlayers(game.getPlayers());
+            //set inactive bomb if player starts with bomb
             if (game.startsWithBomb()) {
                 try {
                     bomb.showBomb();
@@ -179,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
             setNewGameButtonAsStop();
 
-            //start of the game is delayed to avoid sending the bomb before everybody is initialy set
+            //start of the game is delayed to avoid sending the bomb before everybody is initially set
             startGameTimer = new Timer();
             startGameTimer.schedule(new TimerTask() {
                 @Override
@@ -238,6 +255,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    /**
+     * Gets the results returned when an activity is started for a result (here it is only used
+     * to know when bluetooth is turned on)
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == MainActivity.BLUETOOTH_ON) {
             if (resultCode == RESULT_OK) {

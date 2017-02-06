@@ -15,7 +15,7 @@ import java.io.Serializable;
 /**
  * Represents a message send through bluetooth. It mainly contains a type and a payload
  *
- * Created by mcr222 on 27/06/16.
+ * Created by Marc Cayuela Rafols on 27/06/16.
  */
 public class Message implements Serializable {
 
