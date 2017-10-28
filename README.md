@@ -1,5 +1,19 @@
 # Introduction
-This code is the prototipe/base for a new android app game. The **Bomb game**.
+This code is the prototipe/base for a new android app game. The **Pass the bomb** game.
+
+The goal of the project is to provide a tool to android users to *better manage the usage
+of their phones in social reunions, in a fun way.*
+
+Unfortunately, I cannot handle the whole project on my own, thus I am open-sourcing the code,
+as I firmly believe that we can all benefit from the usage of this tool.
+
+## Contributing
+Everyone is welcome to contribute in this project. There is no intention in monetizing
+this project, and once the app is fully functional *all developers can discuss the best
+way of publishing the app.*
+
+See also **How to develop code (good practices)** section below.
+
 
 # Main idea
 The **Bomb game** is a game app that intends to avoid the over use of the phone 
@@ -61,6 +75,10 @@ the ID will disapear, and starting a new game won't produce the same ID.
 5. Test the code that you implement (in a real phone if possible)
 6. **Comment** all the code that you develop
 
+## State of development
+Currently, the app is just a prototype, only tested on two android phones and it "sorts of" work.
+See the issues list for a reference of the problems to be solved.
+
 # Competition analysis
 This are some apps that revolve around the same idea of not looking at your phone.
 There are a lot of them, but all of them focus on oneself.
@@ -79,18 +97,5 @@ not have the sociable interaction of passing the bomb. Additionally it is only f
 iPhone (https://itunes.apple.com/au/app/bsociable/id1002964913?mt=8).
 
 **Thus, we haven't found anything close to similar to our approach, so there is** 
-**market and we are creating something innovative.**
+**market and we are creating something innovative, that can indeed help in some social situations.**
 
-# Making money
-First of all all people involved in the project might be aware that we could potentially
-not win anything, or just very little. So everyone must be aware of the time he/she is
-willing to invest and their limits.
-
-Secondly, approaches to monetize the app:
-1. Add advertisements.
-    *Ferran*: Ads degrade user experience, so lets try to avoid them. Also, I don't know if they make much sense providing that the goal of the app is to not look at your phone :)
-2. Add additional bombs with different behaviors that can spice up the game. 
-As the bomb is shared among users, the price can be split up between players 
-(which makes it insignificant for players, but allows us to make some profit).
-    *Ferran*: we can even sell different mini games. E.g. something like a race: you sum meters whenever you don't look at the phone.
-3. We could let users choose among different icons. We can even include other things so we provide an alternative for people worried about violent: what bout a flower?
